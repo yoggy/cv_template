@@ -1,0 +1,3 @@
+cv_template
+========
+My OpenCV project template for VC10...
