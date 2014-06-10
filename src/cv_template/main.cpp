@@ -10,6 +10,11 @@ cv::Mat process(const cv::Mat &src)
 	return dst;
 }
 
+void debug_draw(cv::Mat &canvas_img)
+{
+	// draw something...
+}
+
 int main(int argc, char* argv[])
 {
 	bool rv;
@@ -24,8 +29,8 @@ int main(int argc, char* argv[])
 		capture(capture_img);
 		process(capture_img);
 
-		// debug draw...
 		capture_img.copyTo(canvas_img);
+		debug_draw(canvas_img);
 		cv::imshow("result", canvas_img);
 
 		int c = cv::waitKey(1);
