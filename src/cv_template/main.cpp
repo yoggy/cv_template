@@ -12,8 +12,13 @@ cv::Mat process(const cv::Mat &src)
 
 int main(int argc, char* argv[])
 {
+	bool rv;
 	cv::Mat capture_img, canvas_img;
-	if (init_video(0) == false) return -1;
+
+	rv = init_video(0);
+	//rv = init_image("source.png");
+	//rv = init_movie("source.m4v");
+	if (rv == false) return -1;
 
 	while(true) {
 		capture(capture_img);
