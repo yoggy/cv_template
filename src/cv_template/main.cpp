@@ -1,22 +1,35 @@
 #include "stdafx.h"
+#include "capture_utils.h"
+
+cv::Mat process(const cv::Mat &src)
+{
+	cv::Mat dst = src;
+
+	// something to do...
+
+	return dst;
+}
 
 int main(int argc, char* argv[])
 {
-	cv::Mat image;
-	image.create(cv::Size(640, 480), CV_8UC3);
+	cv::Mat capture_img, canvas_img;
+	if (init_video(0) == false) return -1;
 
-	for (int y = 0; y < image.rows; ++y) {
-		uchar *p = image.ptr<uchar>(y);
-		for (int x = 0; x < image.cols; ++x) {
-			*(p++) = rand() % 256;
-			*(p++) = rand() % 256;
-			*(p++) = rand() % 256;
+	while(true) {
+		capture(capture_img);
+		process(capture_img);
+
+		// debug draw...
+		capture_img.copyTo(canvas_img);
+		cv::imshow("result", canvas_img);
+
+		int c = cv::waitKey(1);
+		if (c == 27) {
+			break;
 		}
 	}
 
-	cv::imshow("image", image);
-
-	int c = cv::waitKey(0);
+	finish();
 
 	cv::destroyAllWindows();
 
